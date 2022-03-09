@@ -2,7 +2,7 @@ interface TitleProps {
 
 }
 
-export default function Title(props) {
+export default function Title(props: any) {
   return (
     <div className="flex flex-col justify-center">
       <h1 className="px-5 py-2 text-2xl">
