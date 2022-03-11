@@ -1,23 +1,21 @@
 import type { NextPage } from 'next'
+import Button from '../components/Button'
+import Form from '../components/Form'
 import Layout from '../components/Layout'
 import Table from '../components/Table'
-import Customer from '../core/Customer'
+import useCustomers from '../hooks/useCustomers'
 
 const Home: NextPage = () => {
-  const customers = [
-    new Customer('Jack', 34, '1'),
-    new Customer('Kevin', 35, '2'),
-    new Customer('Dylan', 56, '3'),
-    new Customer('Mike', 56, '4'),
-  ]
-
-  function selectedCustomer(customer: Customer) {
-    console.log(`${customer.name} selected!`);
-  }
-
-  function deletedCustomer(customer: Customer) {
-    console.log(`${customer.name} deleted!`);
-  }
+  const {
+    table,
+    showTable,
+    customer,
+    customers,
+    selectCustomer,
+    saveCustomer,
+    deletedCustomer,
+    addCustomer 
+  } = useCustomers();
 
   return (
     <div className={`
@@ -26,10 +24,25 @@ const Home: NextPage = () => {
       text-white
     `}>
       <Layout title='Next-crud'>
-        <Table customers={customers} 
-          selectedCustomer={selectedCustomer}
-          deletedCustomer={deletedCustomer}
-        />
+        {table ? (
+           <>
+           <div className='flex justify-end'>
+             <Button color='green' className='mb-4' onClick={addCustomer}>New Customer</Button>
+           </div>
+           <Table customers={customers} 
+             selectedCustomer={selectCustomer}
+             deletedCustomer={deletedCustomer}
+           />
+         </>
+        ) : (
+          <Form
+            customer={customer}
+            changedCustomer={saveCustomer}
+            canceled={showTable}
+          />
+        )}
+       
+        
       </Layout>
     </div>
   )
