@@ -23,7 +23,7 @@ const Home: NextPage = () => {
       bg-gradient-to-r from-blue-500 to-purple-500
       text-white
     `}>
-      <Layout title='Next-crud'>
+      <Layout title='Fire-crud'>
         {table ? (
            <>
            <div className='flex justify-end'>
